@@ -1,12 +1,13 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.2.0
+ Build 0.2.2
 
  app.js
- Core Application Controller
+ Core Controller
 ========================================
 */
+
 
 
 let selectedAvatar = "🥔";
@@ -42,18 +43,19 @@ function finishProfile(){
 
     if(!username){
 
-
         alert(
 
-            "Please enter a username."
+            "Please enter username."
 
         );
 
-
         return;
 
-
     }
+
+
+
+    createIdentity();
 
 
 
@@ -67,11 +69,7 @@ function finishProfile(){
 
 
 
-    loadLocalPlayer();
-
-
     initializeProfile();
-
 
 
 }
@@ -83,11 +81,13 @@ function finishProfile(){
 function initializeProfile(){
 
 
+
     const profile = getProfile();
 
 
 
     if(!profile){
+
 
         showScreen(
 
@@ -95,7 +95,9 @@ function initializeProfile(){
 
         );
 
+
         return;
+
 
     }
 
@@ -108,9 +110,12 @@ function initializeProfile(){
     ).innerHTML =
 
 
+
     profile.avatar +
 
-    " Welcome, " +
+    " Welcome, "
+
+    +
 
     profile.username;
 
@@ -121,6 +126,7 @@ function initializeProfile(){
         "home-screen"
 
     );
+
 
 
 }
@@ -134,7 +140,7 @@ function createRoom(){
 
     alert(
 
-        "Room creation system coming soon!"
+        "Room system coming soon!"
 
     );
 
@@ -150,7 +156,7 @@ function joinRoom(){
 
     alert(
 
-        "Room joining system coming soon!"
+        "Room joining coming soon!"
 
     );
 
@@ -164,13 +170,13 @@ function joinRoom(){
 function startCouchPotato64(){
 
 
+    loadIdentity();
+
 
     loadProfile();
 
 
-
     initializeProfile();
-
 
 
 }
