@@ -1,15 +1,60 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.3.1
+ Build 0.3.2
 
  onlineRooms.js
- Online Room System
+ Firebase Online Room System
 ========================================
 */
 
 
 let onlineRoom = null;
+let roomListener = null;
+
+
+
+/*
+========================================
+ Generate Room Code
+========================================
+*/
+
+
+function generateRoomCode(){
+
+
+    const characters =
+
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+    let code = "";
+
+
+    for(let i = 0; i < 6; i++){
+
+
+        code += characters[
+
+            Math.floor(
+
+                Math.random() *
+
+                characters.length
+
+            )
+
+        ];
+
+
+    }
+
+
+    return code;
+
+
+}
 
 
 
@@ -28,8 +73,13 @@ async function createOnlineRoom(){
     const profile = getProfile();
 
 
-
     if(!profile){
+
+        alert(
+
+            "Create a profile first."
+
+        );
 
         return;
 
@@ -37,22 +87,25 @@ async function createOnlineRoom(){
 
 
 
-    const roomCode =
-
-    generateRoomCode();
+    const code = generateRoomCode();
 
 
 
     onlineRoom = {
 
 
-        code: roomCode,
+        code: code,
 
 
-        host: profile.username,
+        host:
+
+        profile.playerID,
 
 
-        players: [
+        players:{
+
+
+            [profile.playerID]:
 
 
             {
@@ -63,9 +116,9 @@ async function createOnlineRoom(){
                 profile.username,
 
 
-                playerID:
+                avatar:
 
-                profile.playerID,
+                profile.avatar,
 
 
                 controller:
@@ -76,7 +129,7 @@ async function createOnlineRoom(){
             }
 
 
-        ]
+        }
 
 
     };
@@ -87,7 +140,7 @@ async function createOnlineRoom(){
 
     .ref(
 
-        "rooms/" + roomCode
+        "rooms/" + code
 
     )
 
@@ -99,13 +152,11 @@ async function createOnlineRoom(){
 
 
 
-    console.log(
+    watchOnlineRoom(code);
 
-        "Online room created:",
 
-        roomCode
 
-    );
+    openLobby();
 
 
 
@@ -125,17 +176,29 @@ async function createOnlineRoom(){
 async function joinOnlineRoom(code){
 
 
-    const snapshot =
+    const profile = getProfile();
 
-    await firebase.database()
+
+
+    if(!profile){
+
+        return;
+
+    }
+
+
+
+    const roomRef = firebase.database()
 
     .ref(
 
         "rooms/" + code
 
-    )
+    );
 
-    .get();
+
+
+    const snapshot = await roomRef.get();
 
 
 
@@ -151,24 +214,15 @@ async function joinOnlineRoom(code){
 
         return;
 
-
     }
 
 
 
-    onlineRoom =
-
-    snapshot.val();
+    const room = snapshot.val();
 
 
 
-    const profile =
-
-    getProfile();
-
-
-
-    onlineRoom.players.push({
+    room.players[profile.playerID] = {
 
 
         username:
@@ -176,33 +230,177 @@ async function joinOnlineRoom(code){
         profile.username,
 
 
-        playerID:
+        avatar:
 
-        profile.playerID,
+        profile.avatar,
 
 
         controller:
 
-        onlineRoom.players.length + 1
+        Object.keys(
+
+            room.players
+
+        ).length + 1
 
 
-    });
+    };
 
 
 
-    await firebase.database()
+    await roomRef.set(room);
+
+
+
+    onlineRoom = room;
+
+
+
+    watchOnlineRoom(code);
+
+
+
+    openLobby();
+
+
+}
+
+
+
+
+
+/*
+========================================
+ Watch Room
+========================================
+*/
+
+
+function watchOnlineRoom(code){
+
+
+    if(roomListener){
+
+
+        roomListener.off();
+
+
+    }
+
+
+
+    roomListener = firebase.database()
 
     .ref(
 
         "rooms/" + code
 
-    )
+    );
 
-    .set(
 
-        onlineRoom
+
+    roomListener.on(
+
+        "value",
+
+        snapshot => {
+
+
+            if(snapshot.exists()){
+
+
+                onlineRoom = snapshot.val();
+
+
+
+                displayOnlinePlayers();
+
+
+            }
+
+
+        }
 
     );
+
+
+}
+
+
+
+
+
+/*
+========================================
+ Leave Room
+========================================
+*/
+
+
+async function leaveOnlineRoom(){
+
+
+    const profile = getProfile();
+
+
+
+    if(!onlineRoom || !profile){
+
+        return;
+
+    }
+
+
+
+    const roomRef = firebase.database()
+
+    .ref(
+
+        "rooms/" +
+
+        onlineRoom.code
+
+    );
+
+
+
+    if(
+
+        onlineRoom.host ===
+
+        profile.playerID
+
+    ){
+
+
+        await roomRef.remove();
+
+
+    }
+
+    else{
+
+
+        delete onlineRoom.players[
+
+            profile.playerID
+
+        ];
+
+
+
+        await roomRef.set(
+
+            onlineRoom
+
+        );
+
+
+    }
+
+
+
+    onlineRoom = null;
 
 
 
@@ -214,53 +412,35 @@ async function joinOnlineRoom(code){
 
 /*
 ========================================
- Listen For Room Changes
+ Join Button Helper
 ========================================
 */
 
 
-function watchRoom(code){
+async function joinOnlineGame(){
 
 
-    firebase.database()
+    const code =
 
-    .ref(
+    document.getElementById(
 
-        "rooms/" + code
+        "room-code-input"
 
-    )
+    ).value
 
-    .on(
-
-        "value",
-
-        snapshot => {
-
-
-            if(snapshot.exists()){
-
-
-                onlineRoom =
-
-                snapshot.val();
+    .toUpperCase();
 
 
 
-                console.log(
+    if(!code){
 
-                    "Room updated",
+        return;
 
-                    onlineRoom
-
-                );
+    }
 
 
-            }
 
-
-        }
-
-    );
+    joinOnlineRoom(code);
 
 
 }
