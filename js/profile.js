@@ -1,10 +1,10 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.2.0
+ Build 0.2.1
 
  profile.js
- Local Player Profile System
+ Player Profile System
 ========================================
 */
 
@@ -29,49 +29,6 @@ const defaultAvatars = [
 
 /*
 ========================================
- Generate Player ID
-========================================
-*/
-
-
-function generatePlayerID(){
-
-
-    const numbers = Math.floor(
-
-        10000000 +
-
-        Math.random() *
-
-        89999999
-
-    );
-
-
-    return "CP64-" +
-
-        numbers.toString()
-        .substring(0,4)
-
-        +
-
-        "-"
-
-        +
-
-        numbers.toString()
-        .substring(4);
-
-
-
-}
-
-
-
-
-
-/*
-========================================
  Create Profile
 ========================================
 */
@@ -86,6 +43,16 @@ function createProfile(
 ){
 
 
+    if(!getIdentity()) {
+
+
+        createIdentity();
+
+
+    }
+
+
+
     playerProfile = {
 
 
@@ -97,12 +64,18 @@ function createProfile(
 
         playerID:
 
-        generatePlayerID(),
+        getIdentity().playerID,
+
+
+        friendCode:
+
+        getIdentity().friendCode,
 
 
         created:
 
         new Date()
+
         .toISOString()
 
 
@@ -176,16 +149,8 @@ function loadProfile(){
         JSON.parse(saved);
 
 
-        console.log(
-
-            "Profile loaded:",
-
-            playerProfile.username
-
-        );
-
-
     }
+
 
 
 }
