@@ -36,6 +36,8 @@ Multiplayer N64 Gaming Experience
 
 
 
+<!-- PROFILE CREATION -->
+
 <section id="profile-screen" class="screen">
 
 
@@ -53,19 +55,33 @@ Choose Avatar
 </p>
 
 
-<div>
+<div id="avatar-options">
 
-<button onclick="selectAvatar('🥔')">🥔</button>
-<button onclick="selectAvatar('👾')">👾</button>
-<button onclick="selectAvatar('🤖')">🤖</button>
-<button onclick="selectAvatar('⭐')">⭐</button>
-<button onclick="selectAvatar('🕹️')">🕹️</button>
+<button onclick="selectAvatar('🥔')">
+🥔
+</button>
+
+<button onclick="selectAvatar('👾')">
+👾
+</button>
+
+<button onclick="selectAvatar('🤖')">
+🤖
+</button>
+
+<button onclick="selectAvatar('⭐')">
+⭐
+</button>
+
+<button onclick="selectAvatar('🕹️')">
+🕹️
+</button>
 
 </div>
 
 
 
-<button onclick="finishProfile">
+<button onclick="finishProfile()">
 
 Create Profile
 
@@ -80,7 +96,9 @@ Create Profile
 
 
 
-<section id="home-screen" class="screen active">
+<!-- HOME -->
+
+<section id="home-screen" class="screen">
 
 
 <h2 id="welcome-message"></h2>
@@ -88,32 +106,43 @@ Create Profile
 
 
 <button onclick="showScreen('library-screen')">
+
 My Library
+
 </button>
 
 
 
 <button onclick="showScreen('friends-screen')">
+
 Friends
+
 </button>
 
 
 
 <button onclick="createLobby()">
+
 Host Game
+
 </button>
 
 
 
 <button onclick="showScreen('join-screen')">
+
 Join Game
+
 </button>
 
 
 
 <button onclick="showScreen('settings-screen')">
+
 Settings
+
 </button>
+
 
 
 </section>
@@ -124,6 +153,7 @@ Settings
 
 
 
+<!-- LIBRARY -->
 
 <section id="library-screen" class="screen">
 
@@ -142,13 +172,19 @@ No games added yet.
 </div>
 
 
+
 <button onclick="addGame()">
+
 + Add Game
+
 </button>
 
 
+
 <button onclick="showScreen('home-screen')">
+
 Back
+
 </button>
 
 
@@ -161,6 +197,7 @@ Back
 
 
 
+<!-- FRIENDS -->
 
 <section id="friends-screen" class="screen">
 
@@ -223,6 +260,7 @@ Back
 
 
 
+<!-- ADD FRIEND -->
 
 <section id="add-friend-screen" class="screen">
 
@@ -244,7 +282,6 @@ placeholder="CP64-XXXX-XXXX"
 id="friend-name-input"
 placeholder="Friend Name"
 >
-
 
 
 
@@ -274,33 +311,7 @@ Back
 
 
 
-<section id="host-screen" class="screen">
-
-
-<h2>
-Host Game
-</h2>
-
-
-<button onclick="createRoom()">
-Create Room
-</button>
-
-
-
-<button onclick="showScreen('home-screen')">
-Back
-</button>
-
-
-</section>
-
-
-
-
-
-
-
+<!-- JOIN GAME -->
 
 <section id="join-screen" class="screen">
 
@@ -311,9 +322,10 @@ Join Game
 
 
 <input
-id="room-code"
+id="room-code-input"
 placeholder="Room Code"
 >
+
 
 
 <button onclick="joinRoom()">
@@ -340,6 +352,68 @@ Back
 
 
 
+<!-- LOBBY -->
+
+<section id="lobby-screen" class="screen">
+
+
+<h2>
+Game Lobby
+</h2>
+
+
+
+<p>
+Room Code:
+</p>
+
+
+<h3 id="room-code-display">
+
+</h3>
+
+
+
+
+<h3>
+Players
+</h3>
+
+
+<div id="lobby-players">
+
+</div>
+
+
+
+
+<button onclick="startGame()">
+
+Start Game
+
+</button>
+
+
+
+<button onclick="exitLobby()">
+
+Leave Lobby
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SETTINGS -->
 
 <section id="settings-screen" class="screen">
 
@@ -349,19 +423,29 @@ Settings
 </h2>
 
 
+
 <button onclick="changeTheme('launchConsole')">
+
 Launch Console
+
 </button>
+
 
 
 <button onclick="changeTheme('midnightCRT')">
+
 Midnight CRT
+
 </button>
+
 
 
 <button onclick="changeTheme('arcadeMode')">
+
 Arcade Mode
+
 </button>
+
 
 
 
@@ -372,7 +456,10 @@ Back
 </button>
 
 
+
 </section>
+
+
 
 
 
@@ -385,6 +472,9 @@ Back
 
 
 
+
+
+<!-- SYSTEM FILES -->
 
 <script src="js/navigation.js"></script>
 
@@ -403,6 +493,10 @@ Back
 <script src="js/friends.js"></script>
 
 <script src="js/friendsUI.js"></script>
+
+<script src="js/rooms.js"></script>
+
+<script src="js/lobbyUI.js"></script>
 
 <script src="app.js"></script>
 
