@@ -1,51 +1,16 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.3.0
+ Build 0.3.2
 
  lobbyUI.js
- Lobby Interface
+ Online Lobby Interface
 ========================================
 */
 
 
 
 function openLobby(){
-
-
-    const room = getRoom();
-
-
-
-    if(!room){
-
-
-        alert(
-
-            "No active room."
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    document.getElementById(
-
-        "room-code-display"
-
-    ).innerText =
-
-    room.code;
-
-
-
-    displayLobbyPlayers();
-
 
 
     showScreen(
@@ -55,17 +20,16 @@ function openLobby(){
     );
 
 
+    displayOnlinePlayers();
+
+
 }
 
 
 
 
 
-function displayLobbyPlayers(){
-
-
-    const room = getRoom();
-
+function displayOnlinePlayers(){
 
 
     const list =
@@ -78,7 +42,37 @@ function displayLobbyPlayers(){
 
 
 
-    if(!list || !room){
+    const codeDisplay =
+
+    document.getElementById(
+
+        "room-code-display"
+
+    );
+
+
+
+    if(!onlineRoom){
+
+        return;
+
+    }
+
+
+
+    if(codeDisplay){
+
+
+        codeDisplay.innerText =
+
+        onlineRoom.code;
+
+
+    }
+
+
+
+    if(!list){
 
         return;
 
@@ -90,8 +84,13 @@ function displayLobbyPlayers(){
 
 
 
-    room.players.forEach(player => {
+    Object.values(
 
+        onlineRoom.players
+
+    )
+
+    .forEach(player=>{
 
 
         const entry =
@@ -107,13 +106,15 @@ function displayLobbyPlayers(){
         entry.innerText =
 
 
-        player.controller +
+        player.avatar +
 
-        ". "
+        " " +
 
-        +
+        player.username +
 
-        player.username;
+        "  | Controller " +
+
+        player.controller;
 
 
 
@@ -124,37 +125,38 @@ function displayLobbyPlayers(){
     });
 
 
-
 }
 
 
 
 
 
-function createLobby(){
+async function exitLobby(){
 
 
-    createRoom();
+    await leaveOnlineRoom();
 
-
-    openLobby();
-
-
-}
-
-
-
-
-
-function exitLobby(){
-
-
-    leaveRoom();
 
 
     showScreen(
 
         "home-screen"
+
+    );
+
+
+}
+
+
+
+
+
+function startGame(){
+
+
+    alert(
+
+        "Game launch system coming soon!"
 
     );
 
