@@ -1,10 +1,10 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.1.0
+ Build 0.1.1
 
  style.css
- Foundation Theme Engine
+ Application UI System
 ========================================
 */
 
@@ -39,6 +39,7 @@
 }
 
 
+
 /* ==============================
    Global Reset
 ================================ */
@@ -54,13 +55,15 @@
 }
 
 
+
 /* ==============================
-   Page
+   Body
 ================================ */
 
 body {
 
     min-height:100vh;
+
 
     display:flex;
 
@@ -72,9 +75,13 @@ body {
     background:
 
     radial-gradient(
+
         circle at top,
+
         #34345a,
+
         var(--background)
+
     );
 
 
@@ -84,33 +91,35 @@ body {
     font-family:
 
     system-ui,
+
     -apple-system,
+
     BlinkMacSystemFont,
+
     "Segoe UI",
+
     sans-serif;
 
-
-    overflow:hidden;
 
 }
 
 
+
 /* ==============================
-   Main Panel
+   Main Application Panel
 ================================ */
 
 .container {
 
-
     width:
 
-    min(90%,500px);
+    min(92%,520px);
 
 
-    padding:40px;
+    min-height:550px;
 
 
-    text-align:center;
+    padding:35px;
 
 
     background:
@@ -125,10 +134,10 @@ body {
 
     border:
 
-    1px solid rgba(255,255,255,0.15);
+    1px solid rgba(255,255,255,.15);
 
 
-    border-radius:28px;
+    border-radius:30px;
 
 
     box-shadow:
@@ -136,17 +145,23 @@ body {
     0 25px 60px var(--shadow);
 
 
-    animation:
-
-    fadeIn .8s ease;
-
 }
 
 
 
 /* ==============================
-   Logo
+   Header
 ================================ */
+
+.header {
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+
 
 .logo {
 
@@ -162,22 +177,18 @@ body {
     letter-spacing:-1px;
 
 
-    margin-bottom:15px;
-
-
     text-shadow:
 
-    0 0 20px rgba(0,255,136,.35);
+    0 0 20px rgba(0,255,136,.4);
+
 
 }
 
 
 
-/* ==============================
-   Subtitle
-================================ */
-
 .subtitle {
+
+    margin-top:10px;
 
 
     color:
@@ -185,10 +196,59 @@ body {
     var(--muted);
 
 
-    font-size:1.1rem;
+}
 
 
-    margin-bottom:35px;
+
+/* ==============================
+   Screens
+================================ */
+
+.screen {
+
+    display:none;
+
+    animation:
+
+    fadeIn .3s ease;
+
+}
+
+
+
+.screen.active {
+
+    display:block;
+
+}
+
+
+
+.screen h2 {
+
+
+    text-align:center;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+.screen p {
+
+
+    text-align:center;
+
+
+    color:
+
+    var(--muted);
+
+
+    margin-bottom:20px;
 
 
 }
@@ -205,10 +265,10 @@ button {
     width:100%;
 
 
-    padding:18px;
+    padding:17px;
 
 
-    margin:12px 0;
+    margin:10px 0;
 
 
     border:none;
@@ -223,7 +283,7 @@ button {
     color:white;
 
 
-    font-size:1.15rem;
+    font-size:1.1rem;
 
 
     font-weight:700;
@@ -245,14 +305,14 @@ button {
 
     box-shadow:
 
-
     0 10px 25px rgba(0,0,0,.25);
 
 
     transition:
 
-    transform .15s ease,
-    filter .15s ease;
+    transform .15s,
+
+    filter .15s;
 
 
 }
@@ -284,35 +344,27 @@ button:active {
 
 
 /* ==============================
-   Settings
+   Library
 ================================ */
 
-.settings {
+#game-library {
 
 
-    margin-top:25px;
+    min-height:100px;
 
 
-    color:
-
-    var(--muted);
+    padding:20px;
 
 
-    cursor:pointer;
+    margin-bottom:20px;
 
 
-    transition:.2s;
+    border-radius:20px;
 
 
-}
+    background:
 
-
-.settings:hover {
-
-
-    color:
-
-    var(--text);
+    rgba(0,0,0,.2);
 
 
 }
@@ -320,25 +372,67 @@ button:active {
 
 
 /* ==============================
-   CRT Effect Foundation
-   (disabled by default)
+   Inputs
 ================================ */
 
-.crt {
+input {
 
 
-    position:relative;
+    width:100%;
+
+
+    padding:16px;
+
+
+    margin-bottom:15px;
+
+
+    border:none;
+
+
+    border-radius:14px;
+
+
+    font-size:1rem;
+
+
+    outline:none;
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+    color:white;
+
 
 }
 
 
-.crt::after {
+input::placeholder {
+
+
+    color:
+
+    rgba(255,255,255,.5);
+
+
+}
+
+
+
+/* ==============================
+   CRT Overlay Foundation
+================================ */
+
+.container::after {
 
 
     content:"";
 
 
-    position:absolute;
+    position:fixed;
 
 
     inset:0;
@@ -347,19 +441,23 @@ button:active {
     pointer-events:none;
 
 
+    opacity:.08;
+
+
     background:
+
 
     repeating-linear-gradient(
 
         0deg,
 
-        rgba(255,255,255,.03),
+        white,
 
-        rgba(255,255,255,.03) 1px,
+        white 1px,
 
         transparent 1px,
 
-        transparent 3px
+        transparent 4px
 
     );
 
@@ -381,7 +479,7 @@ button:active {
 
         transform:
 
-        translateY(20px);
+        translateY(15px);
 
     }
 
@@ -402,7 +500,7 @@ button:active {
 
 
 /* ==============================
-   Mobile Adjustments
+   Mobile
 ================================ */
 
 @media(max-width:600px){
@@ -411,20 +509,13 @@ button:active {
     .container {
 
 
-        padding:
-
-        30px 22px;
+        width:95%;
 
 
-    }
+        min-height:90vh;
 
 
-    button {
-
-
-        padding:
-
-        16px;
+        padding:25px;
 
 
     }
