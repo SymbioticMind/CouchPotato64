@@ -1,35 +1,45 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.1.0
+ Build 0.1.1
 
  app.js
- Foundation Logic
+ Core Application Controller
 ========================================
 */
 
 
 console.log(
-    "Couch Potato 64 initialized."
+    "================================"
+);
+
+console.log(
+    "Couch Potato 64 Booting..."
+);
+
+console.log(
+    "================================"
 );
 
 
 
+
+
 /*
 ========================================
- Game Room Functions
+ Host Game System
 ========================================
 */
 
 
-function hostGame() {
+function createRoom() {
 
 
     alert(
 
-        "Host Game selected.\n\n" +
+        "Creating Game Room...\n\n" +
 
-        "Online multiplayer systems are coming soon!"
+        "Multiplayer networking will be added soon!"
 
     );
 
@@ -38,110 +48,129 @@ function hostGame() {
 
 
 
-function joinGame() {
-
-
-    alert(
-
-        "Join Game selected.\n\n" +
-
-        "Room connection systems are coming soon!"
-
-    );
-
-
-}
-
 
 
 /*
 ========================================
- Theme System Foundation
+ Join Game System
 ========================================
 */
 
 
-const themes = {
+function joinRoom() {
 
 
-    launchConsole: {
+    const roomCode = document.getElementById(
 
-        name:"Launch Console",
+        "room-code"
 
-        primary:"#00ff88",
-
-        secondary:"#0088ff"
-
-    },
-
-
-    midnightCRT: {
-
-        name:"Midnight CRT",
-
-        primary:"#ff00cc",
-
-        secondary:"#5500ff"
-
-    },
-
-
-    arcadeMode: {
-
-        name:"Arcade Mode",
-
-        primary:"#ff9900",
-
-        secondary:"#ff0055"
-
-    }
-
-
-};
+    ).value;
 
 
 
-let currentTheme =
-
-"launchConsole";
+    if(!roomCode) {
 
 
+        alert(
 
-function loadTheme(themeName){
+            "Please enter a room code."
 
+        );
 
-    const theme = themes[themeName];
-
-
-    if(!theme){
 
         return;
 
+
     }
 
 
-    document.documentElement.style
-    .setProperty(
-        "--primary",
-        theme.primary
+
+    alert(
+
+        "Joining room: " +
+
+        roomCode +
+
+        "\n\n" +
+
+        "Networking system coming soon!"
+
     );
 
 
-    document.documentElement.style
-    .setProperty(
-        "--secondary",
-        theme.secondary
-    );
+}
 
 
-    currentTheme = themeName;
+
+
+
+/*
+========================================
+ Application Startup
+========================================
+*/
+
+
+function startCouchPotato64() {
 
 
     console.log(
 
-        "Theme changed:",
+        "Loading Settings..."
 
-        theme.name
+    );
+
+
+    if(typeof loadSettings === "function") {
+
+
+        loadSettings();
+
+    }
+
+
+
+
+
+    console.log(
+
+        "Loading Themes..."
+
+    );
+
+
+    if(typeof loadTheme === "function") {
+
+
+        loadTheme();
+
+    }
+
+
+
+
+
+    console.log(
+
+        "Loading Library..."
+
+    );
+
+
+    if(typeof loadLibrary === "function") {
+
+
+        loadLibrary();
+
+    }
+
+
+
+
+
+    console.log(
+
+        "Couch Potato 64 Ready!"
 
     );
 
@@ -150,17 +179,12 @@ function loadTheme(themeName){
 
 
 
-/*
-========================================
- Startup
-========================================
-*/
 
 
-window.onload = function(){
+window.addEventListener(
 
+    "load",
 
-    loadTheme(currentTheme);
+    startCouchPotato64
 
-
-};
+);
