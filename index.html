@@ -19,39 +19,271 @@
 
 <body>
 
+
     <main class="container">
 
-        <h1 class="logo">
-            Couch Potato 64
-        </h1>
+
+        <!-- Application Header -->
+
+        <header class="header">
+
+            <h1 class="logo">
+                Couch Potato 64
+            </h1>
 
 
-        <p class="subtitle">
-            Multiplayer N64 Gaming Experience
-        </p>
+            <p class="subtitle">
+                Multiplayer N64 Gaming Experience
+            </p>
 
 
-        <button onclick="hostGame()">
-            Host Game
-        </button>
+        </header>
 
 
-        <button onclick="joinGame()">
-            Join Game
-        </button>
+
+        <!-- ==========================
+             HOME SCREEN
+        =========================== -->
+
+        <section 
+            id="home-screen" 
+            class="screen active"
+        >
 
 
-        <div class="settings">
+            <button onclick="showScreen('library-screen')">
 
-            ⚙ Settings
+                My Library
 
-        </div>
+            </button>
+
+
+            <button onclick="showScreen('host-screen')">
+
+                Host Game
+
+            </button>
+
+
+            <button onclick="showScreen('join-screen')">
+
+                Join Game
+
+            </button>
+
+
+            <button onclick="showScreen('settings-screen')">
+
+                Settings
+
+            </button>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             LIBRARY SCREEN
+        =========================== -->
+
+
+        <section 
+            id="library-screen" 
+            class="screen"
+        >
+
+
+            <h2>
+                My Library
+            </h2>
+
+
+            <div id="game-library">
+
+                <p>
+                    No games added yet.
+                </p>
+
+
+            </div>
+
+
+            <button onclick="addGame()">
+
+                + Add Game
+
+            </button>
+
+
+            <button onclick="showScreen('home-screen')">
+
+                Back
+
+            </button>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             HOST SCREEN
+        =========================== -->
+
+
+        <section 
+            id="host-screen" 
+            class="screen"
+        >
+
+
+            <h2>
+                Host Game
+            </h2>
+
+
+            <p>
+                Create an online game room.
+            </p>
+
+
+            <button onclick="createRoom()">
+
+                Create Room
+
+            </button>
+
+
+            <button onclick="showScreen('home-screen')">
+
+                Back
+
+            </button>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             JOIN SCREEN
+        =========================== -->
+
+
+        <section 
+            id="join-screen" 
+            class="screen"
+        >
+
+
+            <h2>
+                Join Game
+            </h2>
+
+
+            <input
+                id="room-code"
+                placeholder="Enter Room Code"
+            >
+
+
+            <button onclick="joinRoom()">
+
+                Join Room
+
+            </button>
+
+
+            <button onclick="showScreen('home-screen')">
+
+                Back
+
+            </button>
+
+
+        </section>
+
+
+
+
+
+        <!-- ==========================
+             SETTINGS SCREEN
+        =========================== -->
+
+
+        <section 
+            id="settings-screen" 
+            class="screen"
+        >
+
+
+            <h2>
+                Settings
+            </h2>
+
+
+            <p>
+                Theme Selection
+            </p>
+
+
+            <button onclick="changeTheme('launchConsole')">
+
+                Launch Console
+
+            </button>
+
+
+            <button onclick="changeTheme('midnightCRT')">
+
+                Midnight CRT
+
+            </button>
+
+
+            <button onclick="changeTheme('arcadeMode')">
+
+                Arcade Mode
+
+            </button>
+
+
+            <button onclick="showScreen('home-screen')">
+
+                Back
+
+            </button>
+
+
+        </section>
+
 
 
     </main>
 
 
+
+
+
+    <script src="js/navigation.js"></script>
+
+    <script src="js/library.js"></script>
+
+    <script src="js/themes.js"></script>
+
+    <script src="js/settings.js"></script>
+
     <script src="app.js"></script>
+
+
 
 </body>
 
