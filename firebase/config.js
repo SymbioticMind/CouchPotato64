@@ -9,32 +9,18 @@
 */
 
 
-// Replace everything inside the object
-// with your Firebase Web App config
-
-
 const firebaseConfig = {
 
+    apiKey: "AIzaSyAZ0hv3vwUJhNxQhjXvA_c9LoZB-X7Tjpk",
 
-    apiKey: "YOUR_API_KEY",
+    authDomain: "couch-potato-64.firebaseapp.com",
 
+    projectId: "couch-potato-64",
 
-    authDomain: "YOUR_AUTH_DOMAIN",
+    storageBucket: "couch-potato-64.firebasestorage.app",
 
+    messagingSenderId: "300245469117",
 
-    databaseURL: "YOUR_DATABASE_URL",
-
-
-    projectId: "YOUR_PROJECT_ID",
-
-
-    storageBucket: "YOUR_STORAGE_BUCKET",
-
-
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-
-
-    appId: "YOUR_APP_ID"
-
+    appId: "1:300245469117:web:62ab79c91d35a5250534d4"
 
 };
