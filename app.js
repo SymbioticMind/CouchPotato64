@@ -1,7 +1,7 @@
 /*
 ========================================
  Couch Potato 64
- Build 0.1.1
+ Build 0.2.0
 
  app.js
  Core Application Controller
@@ -9,39 +9,16 @@
 */
 
 
-console.log(
-    "================================"
-);
-
-console.log(
-    "Couch Potato 64 Booting..."
-);
-
-console.log(
-    "================================"
-);
+let selectedAvatar = "🥔";
 
 
 
 
 
-/*
-========================================
- Host Game System
-========================================
-*/
+function selectAvatar(avatar){
 
 
-function createRoom() {
-
-
-    alert(
-
-        "Creating Game Room...\n\n" +
-
-        "Multiplayer networking will be added soon!"
-
-    );
+    selectedAvatar = avatar;
 
 
 }
@@ -50,30 +27,25 @@ function createRoom() {
 
 
 
-/*
-========================================
- Join Game System
-========================================
-*/
+function finishProfile(){
 
 
-function joinRoom() {
+    const username =
 
+    document.getElementById(
 
-    const roomCode = document.getElementById(
-
-        "room-code"
+        "username-input"
 
     ).value;
 
 
 
-    if(!roomCode) {
+    if(!username){
 
 
         alert(
 
-            "Please enter a room code."
+            "Please enter a username."
 
         );
 
@@ -85,15 +57,68 @@ function joinRoom() {
 
 
 
-    alert(
+    createProfile(
 
-        "Joining room: " +
+        username,
 
-        roomCode +
+        selectedAvatar
 
-        "\n\n" +
+    );
 
-        "Networking system coming soon!"
+
+
+    loadLocalPlayer();
+
+
+    initializeProfile();
+
+
+
+}
+
+
+
+
+
+function initializeProfile(){
+
+
+    const profile = getProfile();
+
+
+
+    if(!profile){
+
+        showScreen(
+
+            "profile-screen"
+
+        );
+
+        return;
+
+    }
+
+
+
+    document.getElementById(
+
+        "welcome-message"
+
+    ).innerHTML =
+
+
+    profile.avatar +
+
+    " Welcome, " +
+
+    profile.username;
+
+
+
+    showScreen(
+
+        "home-screen"
 
     );
 
@@ -104,75 +129,48 @@ function joinRoom() {
 
 
 
-/*
-========================================
- Application Startup
-========================================
-*/
+function createRoom(){
 
 
-function startCouchPotato64() {
+    alert(
 
-
-    console.log(
-
-        "Loading Settings..."
+        "Room creation system coming soon!"
 
     );
 
 
-    if(typeof loadSettings === "function") {
-
-
-        loadSettings();
-
-    }
+}
 
 
 
 
 
-    console.log(
+function joinRoom(){
 
-        "Loading Themes..."
+
+    alert(
+
+        "Room joining system coming soon!"
 
     );
 
 
-    if(typeof loadTheme === "function") {
-
-
-        loadTheme();
-
-    }
+}
 
 
 
 
 
-    console.log(
-
-        "Loading Library..."
-
-    );
-
-
-    if(typeof loadLibrary === "function") {
-
-
-        loadLibrary();
-
-    }
+function startCouchPotato64(){
 
 
 
+    loadProfile();
 
 
-    console.log(
 
-        "Couch Potato 64 Ready!"
+    initializeProfile();
 
-    );
 
 
 }
