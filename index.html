@@ -3,16 +3,13 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta 
-        name="viewport" 
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Couch Potato 64</title>
+<title>Couch Potato 64</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -20,268 +17,295 @@
 <body>
 
 
-    <main class="container">
+<main class="container">
 
 
-        <!-- Application Header -->
 
-        <header class="header">
+<header class="header">
 
-            <h1 class="logo">
-                Couch Potato 64
-            </h1>
+<h1 class="logo">
+Couch Potato 64
+</h1>
 
+<p class="subtitle">
+Multiplayer N64 Gaming Experience
+</p>
 
-            <p class="subtitle">
-                Multiplayer N64 Gaming Experience
-            </p>
+</header>
 
 
-        </header>
 
 
+<!-- PROFILE CREATION -->
 
-        <!-- ==========================
-             HOME SCREEN
-        =========================== -->
+<section 
+id="profile-screen"
+class="screen"
+>
 
-        <section 
-            id="home-screen" 
-            class="screen active"
-        >
 
+<h2>
+Create Profile
+</h2>
 
-            <button onclick="showScreen('library-screen')">
 
-                My Library
+<input
+id="username-input"
+placeholder="Enter Username"
+>
 
-            </button>
 
+<p>
+Choose Avatar
+</p>
 
-            <button onclick="showScreen('host-screen')">
 
-                Host Game
+<div id="avatar-options">
 
-            </button>
 
+<button onclick="selectAvatar('🥔')">
+🥔
+</button>
 
-            <button onclick="showScreen('join-screen')">
 
-                Join Game
+<button onclick="selectAvatar('👾')">
+👾
+</button>
 
-            </button>
 
+<button onclick="selectAvatar('🤖')">
+🤖
+</button>
 
-            <button onclick="showScreen('settings-screen')">
 
-                Settings
+<button onclick="selectAvatar('⭐')">
+⭐
+</button>
 
-            </button>
 
+<button onclick="selectAvatar('🕹️')">
+🕹️
+</button>
 
-        </section>
 
+</div>
 
 
 
+<button onclick="finishProfile()">
 
-        <!-- ==========================
-             LIBRARY SCREEN
-        =========================== -->
+Create Profile
 
+</button>
 
-        <section 
-            id="library-screen" 
-            class="screen"
-        >
 
 
-            <h2>
-                My Library
-            </h2>
+</section>
 
 
-            <div id="game-library">
 
-                <p>
-                    No games added yet.
-                </p>
 
 
-            </div>
 
+<!-- HOME -->
 
-            <button onclick="addGame()">
+<section
+id="home-screen"
+class="screen active"
+>
 
-                + Add Game
 
-            </button>
+<h2 id="welcome-message">
 
+</h2>
 
-            <button onclick="showScreen('home-screen')">
 
-                Back
 
-            </button>
+<button onclick="showScreen('library-screen')">
 
+My Library
 
-        </section>
+</button>
 
 
 
+<button onclick="showScreen('host-screen')">
 
+Host Game
 
-        <!-- ==========================
-             HOST SCREEN
-        =========================== -->
+</button>
 
 
-        <section 
-            id="host-screen" 
-            class="screen"
-        >
 
+<button onclick="showScreen('join-screen')">
 
-            <h2>
-                Host Game
-            </h2>
+Join Game
 
+</button>
 
-            <p>
-                Create an online game room.
-            </p>
 
 
-            <button onclick="createRoom()">
+<button onclick="showScreen('settings-screen')">
 
-                Create Room
+Settings
 
-            </button>
+</button>
 
 
-            <button onclick="showScreen('home-screen')">
 
-                Back
+</section>
 
-            </button>
 
 
-        </section>
 
 
+<!-- EXISTING SCREENS -->
 
+<section id="library-screen" class="screen">
 
+<h2>
+My Library
+</h2>
 
-        <!-- ==========================
-             JOIN SCREEN
-        =========================== -->
+<div id="game-library">
 
+<p>
+No games added yet.
+</p>
 
-        <section 
-            id="join-screen" 
-            class="screen"
-        >
+</div>
 
 
-            <h2>
-                Join Game
-            </h2>
+<button onclick="addGame()">
++ Add Game
+</button>
 
 
-            <input
-                id="room-code"
-                placeholder="Enter Room Code"
-            >
+<button onclick="showScreen('home-screen')">
+Back
+</button>
 
 
-            <button onclick="joinRoom()">
+</section>
 
-                Join Room
 
-            </button>
 
 
-            <button onclick="showScreen('home-screen')">
 
-                Back
 
-            </button>
+<section id="host-screen" class="screen">
 
+<h2>
+Host Game
+</h2>
 
-        </section>
+<p>
+Create a game room.
+</p>
 
 
+<button onclick="createRoom()">
+Create Room
+</button>
 
 
+<button onclick="showScreen('home-screen')">
+Back
+</button>
 
-        <!-- ==========================
-             SETTINGS SCREEN
-        =========================== -->
 
+</section>
 
-        <section 
-            id="settings-screen" 
-            class="screen"
-        >
 
 
-            <h2>
-                Settings
-            </h2>
 
 
-            <p>
-                Theme Selection
-            </p>
 
 
-            <button onclick="changeTheme('launchConsole')">
+<section id="join-screen" class="screen">
 
-                Launch Console
+<h2>
+Join Game
+</h2>
 
-            </button>
 
+<input
+id="room-code"
+placeholder="Room Code"
+>
 
-            <button onclick="changeTheme('midnightCRT')">
 
-                Midnight CRT
+<button onclick="joinRoom()">
+Join Room
+</button>
 
-            </button>
 
+<button onclick="showScreen('home-screen')">
+Back
+</button>
 
-            <button onclick="changeTheme('arcadeMode')">
 
-                Arcade Mode
+</section>
 
-            </button>
 
 
-            <button onclick="showScreen('home-screen')">
 
-                Back
 
-            </button>
 
 
-        </section>
+<section id="settings-screen" class="screen">
 
+<h2>
+Settings
+</h2>
 
 
-    </main>
+<button onclick="changeTheme('launchConsole')">
+Launch Console
+</button>
 
 
+<button onclick="changeTheme('midnightCRT')">
+Midnight CRT
+</button>
 
 
+<button onclick="changeTheme('arcadeMode')">
+Arcade Mode
+</button>
 
-    <script src="js/navigation.js"></script>
 
-    <script src="js/library.js"></script>
+<button onclick="showScreen('home-screen')">
+Back
+</button>
 
-    <script src="js/themes.js"></script>
 
-    <script src="js/settings.js"></script>
+</section>
 
-    <script src="app.js"></script>
+
+
+
+
+
+</main>
+
+
+
+
+
+<script src="js/navigation.js"></script>
+
+<script src="js/library.js"></script>
+
+<script src="js/themes.js"></script>
+
+<script src="js/settings.js"></script>
+
+<script src="js/profile.js"></script>
+
+<script src="js/players.js"></script>
+
+<script src="app.js"></script>
 
 
 
